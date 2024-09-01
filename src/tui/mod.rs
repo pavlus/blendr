@@ -120,7 +120,7 @@ trait AppRoute {
     where
         Self: Sized;
     fn handle_input(&mut self, key: &KeyEvent) -> HandleKeydownResult;
-    fn render(&mut self, area: Rect, is_active: bool, f: &mut Frame<TerminalBackend>)
+    fn render(&mut self, area: Rect, is_active: bool, f: &mut Frame)
         -> Result<()>;
 }
 
@@ -217,9 +217,9 @@ fn tui_loop(
     }
 }
 
-fn ui(f: &mut Frame<TerminalBackend>, app: &mut App) {
+fn ui(f: &mut Frame, app: &mut App) {
     // Create two chunks with equal horizontal screen space
-    let active_blocks = app.get_active_blocks(f.size().width);
+    let active_blocks = app.get_active_blocks(f.area().width);
     let chunks = Layout::default()
         .direction(Direction::Horizontal)
         .constraints(
@@ -228,7 +228,7 @@ fn ui(f: &mut Frame<TerminalBackend>, app: &mut App) {
                 .map(|_| Constraint::Ratio(1, active_blocks.len() as u32))
                 .collect::<Vec<_>>(),
         )
-        .split(f.size());
+        .split(f.area());
 
     for (i, block) in active_blocks.into_iter().enumerate() {
         let is_active = matches!(block, BlockVariant::Primary(_));

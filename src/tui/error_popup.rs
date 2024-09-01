@@ -1,6 +1,6 @@
 use crate::{
     error,
-    tui::{ui::BlendrBlock, AppRoute, HandleKeydownResult, TerminalBackend},
+    tui::{ui::BlendrBlock, AppRoute, HandleKeydownResult},
     Ctx,
 };
 use crossterm::event::KeyCode;
@@ -71,7 +71,7 @@ impl AppRoute for ErrorView {
         &mut self,
         _area: Rect,
         _is_active: bool,
-        f: &mut Frame<TerminalBackend>,
+        f: &mut Frame,
     ) -> error::Result<()> {
         let global_error_lock = self.ctx.global_error.lock().unwrap();
         let error = if let Some(error) = global_error_lock.deref() {
@@ -80,7 +80,7 @@ impl AppRoute for ErrorView {
             return Ok(());
         };
 
-        let area = centered_rect(60, 20, f.size());
+        let area = centered_rect(60, 20, f.area());
         f.render_widget(Clear, area); //this clears out the background
 
         let paragraph = Paragraph::new(vec![Line::from(""), Line::from(format!("{error}"))]).block(

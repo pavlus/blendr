@@ -4,7 +4,7 @@ use tui::{
     widgets::{Block, Borders, Paragraph, Wrap},
 };
 
-use crate::tui::{AppRoute, HandleKeydownResult, TerminalBackend};
+use crate::tui::{AppRoute, HandleKeydownResult};
 
 pub struct WelcomeBlock {}
 
@@ -100,7 +100,7 @@ impl AppRoute for WelcomeBlock {
         &mut self,
         area: tui::layout::Rect,
         _is_active: bool,
-        f: &mut tui::Frame<TerminalBackend>,
+        f: &mut tui::Frame,
     ) -> crate::error::Result<()> {
         if area.height > 25 {
             let paragraph = Paragraph::new(Text::from(if area.height < 30 {

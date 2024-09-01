@@ -205,7 +205,7 @@ impl AppRoute for PeripheralView {
         &mut self,
         area: tui::layout::Rect,
         route_active: bool,
-        f: &mut tui::Frame<super::TerminalBackend>,
+        f: &mut tui::Frame,
     ) -> crate::error::Result<()> {
         let active_route = self.ctx.get_active_route();
 

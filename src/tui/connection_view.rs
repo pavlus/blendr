@@ -198,7 +198,7 @@ impl AppRoute for ConnectionView {
         &mut self,
         area: tui::layout::Rect,
         route_active: bool,
-        f: &mut tui::Frame<super::TerminalBackend>,
+        f: &mut tui::Frame,
     ) -> crate::error::Result<()> {
         let active_route = self.ctx.active_route.read()?;
         let (_, characteristic, history, historical_view_index) =

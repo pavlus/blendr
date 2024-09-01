@@ -172,7 +172,7 @@ impl AppRoute for PeripheralList {
         &mut self,
         area: Rect,
         route_active: bool,
-        f: &mut Frame<super::TerminalBackend>,
+        f: &mut Frame,
     ) -> Result<()> {
         let scan = self.ctx.latest_scan.read();
         let BleScan {
