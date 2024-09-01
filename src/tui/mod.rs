@@ -120,8 +120,7 @@ trait AppRoute {
     where
         Self: Sized;
     fn handle_input(&mut self, key: &KeyEvent) -> HandleKeydownResult;
-    fn render(&mut self, area: Rect, is_active: bool, f: &mut Frame)
-        -> Result<()>;
+    fn render(&mut self, area: Rect, is_active: bool, f: &mut Frame) -> Result<()>;
 }
 
 pub fn run_tui_app(ctx: Arc<Ctx>) -> Result<()> {

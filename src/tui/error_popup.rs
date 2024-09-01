@@ -67,12 +67,7 @@ impl AppRoute for ErrorView {
         }
     }
 
-    fn render(
-        &mut self,
-        _area: Rect,
-        _is_active: bool,
-        f: &mut Frame,
-    ) -> error::Result<()> {
+    fn render(&mut self, _area: Rect, _is_active: bool, f: &mut Frame) -> error::Result<()> {
         let global_error_lock = self.ctx.global_error.lock().unwrap();
         let error = if let Some(error) = global_error_lock.deref() {
             error

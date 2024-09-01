@@ -168,12 +168,7 @@ impl AppRoute for PeripheralList {
         HandleKeydownResult::Continue
     }
 
-    fn render(
-        &mut self,
-        area: Rect,
-        route_active: bool,
-        f: &mut Frame,
-    ) -> Result<()> {
+    fn render(&mut self, area: Rect, route_active: bool, f: &mut Frame) -> Result<()> {
         let scan = self.ctx.latest_scan.read();
         let BleScan {
             peripherals,
